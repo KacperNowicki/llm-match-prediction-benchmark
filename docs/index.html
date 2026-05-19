@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>LLM Match Prediction Benchmark</title>
+    <meta
+      name="description"
+      content="A local-first League of Legends esports prediction benchmark for comparing LLM picks, exact scores, and consensus."
+    />
+    <link rel="stylesheet" href="./site.css" />
+  </head>
+  <body>
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow">League of Legends esports, measured match by match</p>
+          <h1 id="page-title">LLM Match Prediction Benchmark</h1>
+          <p class="lede">
+            A live-ish public snapshot of a private local benchmark: weekly LLM picks, actual match results,
+            exact-score hits, and the painfully close race at the top.
+          </p>
+          <div class="hero-actions" aria-label="Project links">
+            <a href="https://github.com/KacperNowicki/llm-match-prediction-benchmark">GitHub</a>
+            <a href="./ARCHITECTURE.md">Architecture</a>
+          </div>
+        </div>
+        <div class="score-orbit" aria-label="Benchmark snapshot">
+          <div class="score-tile major">
+            <span>1,857</span>
+            <strong>LLM predictions</strong>
+          </div>
+          <div class="score-tile">
+            <span>308</span>
+            <strong>matches tracked</strong>
+          </div>
+          <div class="score-tile">
+            <span>249</span>
+            <strong>results scored</strong>
+          </div>
+          <div class="score-tile">
+            <span>9</span>
+            <strong>active models</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="band stats-band" aria-labelledby="stats-title">
+        <div class="section-heading">
+          <p class="eyebrow">Snapshot: May 19, 2026</p>
+          <h2 id="stats-title">Benchmark scoreboard</h2>
+          <p>
+            Scoring is simple: correct winner = 1 point, exact score = +1 point. Public page numbers are copied from
+            the local SQLite database; the database itself stays out of git.
+          </p>
+        </div>
+        <div class="leader-card" aria-label="Current benchmark leader">
+          <div>
+            <span class="rank-badge">#1</span>
+            <h3>gpt leads by one point</h3>
+            <p>258 points from 247 scored picks. Grok is one exact score behind; Gemini has the best winner rate.</p>
+          </div>
+          <dl>
+            <div><dt>leader points</dt><dd>258/498</dd></div>
+            <div><dt>winner hit rate</dt><dd>69.6%</dd></div>
+            <div><dt>exact score rate</dt><dd>34.8%</dd></div>
+          </dl>
+        </div>
+
+        <div class="score-table-wrap">
+          <table class="score-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Model</th>
+                <th>Points</th>
+                <th>Winner</th>
+                <th>Exact</th>
+                <th>Coverage</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>gpt</td><td>258</td><td>69.6%</td><td>34.8%</td><td>99.2%</td></tr>
+              <tr><td>2</td><td>Grok</td><td>257</td><td>69.6%</td><td>34.4%</td><td>99.2%</td></tr>
+              <tr><td>3</td><td>Gemini</td><td>256</td><td>70.4%</td><td>33.2%</td><td>99.2%</td></tr>
+              <tr><td>4</td><td>Kimi</td><td>251</td><td>67.3%</td><td>35.1%</td><td>98.4%</td></tr>
+              <tr><td>5</td><td>GLM</td><td>250</td><td>67.6%</td><td>33.6%</td><td>99.2%</td></tr>
+              <tr><td>6</td><td>DeepSeek</td><td>244</td><td>65.4%</td><td>35.0%</td><td>97.6%</td></tr>
+              <tr><td>7</td><td>Claude</td><td>223</td><td>63.2%</td><td>27.1%</td><td>99.2%</td></tr>
+              <tr><td>8</td><td>Qwen</td><td>0</td><td>-</td><td>-</td><td>0.0%</td></tr>
+              <tr><td>9</td><td>MuseSpark</td><td>0</td><td>-</td><td>-</td><td>0.0%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="band stats-band" aria-labelledby="tournament-title">
+        <div class="section-heading">
+          <p class="eyebrow">Per-tournament scorecards</p>
+          <h2 id="tournament-title">No hiding behind the aggregate</h2>
+          <p>
+            Each cell is model points over the tournament maximum. Pending playoff slates stay visible, but they do
+            not count until results are entered.
+          </p>
+        </div>
+        <div class="score-table-wrap wide">
+          <table class="score-table tournament-table">
+            <thead>
+              <tr>
+                <th>Tournament</th>
+                <th>Scored</th>
+                <th>gpt</th>
+                <th>Grok</th>
+                <th>Kimi</th>
+                <th>Gemini</th>
+                <th>DeepSeek</th>
+                <th>GLM</th>
+                <th>Claude</th>
+                <th>Qwen</th>
+                <th>MuseSpark</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>First Stand</td><td>13/13</td><td>17/26</td><td>14/26</td><td>15/26</td><td>16/26</td><td>17/26</td><td>14/26</td><td>12/26</td><td>0/26</td><td>0/26</td></tr>
+              <tr><td>Winter mix</td><td>22/22</td><td>21/44</td><td>21/44</td><td>20/44</td><td>16/44</td><td>18/44</td><td>20/44</td><td>19/44</td><td>0/44</td><td>0/44</td></tr>
+              <tr><td>LCK Spring</td><td>70/90</td><td>80/140</td><td>73/140</td><td>81/140</td><td>77/140</td><td>76/140</td><td>83/140</td><td>71/140</td><td>0/140</td><td>0/140</td></tr>
+              <tr><td>LCS Spring</td><td>28/28</td><td>26/56</td><td>33/56</td><td>29/56</td><td>38/56</td><td>33/56</td><td>24/56</td><td>28/56</td><td>0/56</td><td>0/56</td></tr>
+              <tr><td>LEC Spring</td><td>45/45</td><td>44/90</td><td>47/90</td><td>41/90</td><td>47/90</td><td>44/90</td><td>50/90</td><td>39/90</td><td>0/90</td><td>0/90</td></tr>
+              <tr><td>LPL Spring</td><td>71/71</td><td>70/142</td><td>69/142</td><td>65/142</td><td>62/142</td><td>56/142</td><td>59/142</td><td>54/142</td><td>0/142</td><td>0/142</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">
+          Qwen and MuseSpark were added after the historical workbook import. Both have playoff predictions pending,
+          but completed-match score stays zero until those matches resolve.
+        </p>
+        <div class="pending-strip" aria-label="Pending scorecards">
+          <span>LCK Road to MSI: 0/5 scored</span>
+          <span>LCS Spring Playoffs: 2 matches picked by 8 models</span>
+          <span>LEC Spring Playoffs: 2 matches picked by 8 models</span>
+          <span>LPL Split 2 Playoffs: 4 matches picked by 8 models</span>
+        </div>
+      </section>
+
+      <section class="band stats-band" aria-labelledby="coverage-title">
+        <div class="section-heading">
+          <p class="eyebrow">League coverage</p>
+          <h2 id="coverage-title">Where the evidence comes from</h2>
+        </div>
+        <div class="league-grid">
+          <article>
+            <span>LCK</span>
+            <strong>70/95 scored</strong>
+            <p>557 model picks</p>
+          </article>
+          <article>
+            <span>LPL</span>
+            <strong>71/89 scored</strong>
+            <p>512 model picks</p>
+          </article>
+          <article>
+            <span>LEC</span>
+            <strong>45/53 scored</strong>
+            <p>331 model picks</p>
+          </article>
+          <article>
+            <span>LCS</span>
+            <strong>28/36 scored</strong>
+            <p>212 model picks</p>
+          </article>
+          <article>
+            <span>First Stand</span>
+            <strong>13/13 scored</strong>
+            <p>international event</p>
+          </article>
+          <article>
+            <span>Winter mix</span>
+            <strong>22/22 scored</strong>
+            <p>LCK Cup, LCS Lock-In, LEC Versus</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="band" aria-labelledby="loop-title">
+        <div class="section-heading">
+          <p class="eyebrow">The loop</p>
+          <h2 id="loop-title">From prompt to scoreboard</h2>
+        </div>
+        <div class="flow" aria-label="Workflow diagram">
+          <div><span>01</span><strong>Tournament</strong><p>Add or select a league slate.</p></div>
+          <div><span>02</span><strong>Prompt</strong><p>Generate clean weekly model tasks.</p></div>
+          <div><span>03</span><strong>Predictions</strong><p>Paste messy TSV or model text.</p></div>
+          <div><span>04</span><strong>Review</strong><p>Catch wrong teams, scores, and counts.</p></div>
+          <div><span>05</span><strong>Results</strong><p>Enter actual winners and series scores.</p></div>
+          <div><span>06</span><strong>Scores</strong><p>Rank models and weighted Consensus.</p></div>
+        </div>
+      </section>
+
+      <section class="band methodology" aria-labelledby="method-title">
+        <div class="section-heading">
+          <p class="eyebrow">Methodology</p>
+          <h2 id="method-title">Same prompt, strict output, review before scoring</h2>
+          <p>
+            Every model gets the same match order and scoring constraints. The app filters completed matches and
+            unresolved placeholders out of weekly prompts, then parses the final TSV-style answer into a review table
+            before anything is saved.
+          </p>
+        </div>
+        <div class="method-grid">
+          <article>
+            <span>01</span>
+            <strong>Prompt input</strong>
+            <p>Upcoming resolved matches only. No TBD, seed placeholders, or already-completed rows.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <strong>Required output</strong>
+            <p>One TSV code block, league headers allowed, one prediction per match in the given order.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <strong>Review gate</strong>
+            <p>Parser flags illegal scores, wrong winners, duplicate rows, ambiguous teams, and count mismatches.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <strong>Scoring</strong>
+            <p>Correct winner = 1 point. Exact score = +1 point. Maximum = 2 per completed match.</p>
+          </article>
+        </div>
+        <pre class="prompt-sample" aria-label="Public prompt template">Use web search to look up the latest information about each team's recent form, roster changes, standings, and head-to-head records for the 2026 season. Think step by step about each matchup before predicting. Then predict the winner and score for all matches below.
+
+After your analysis, respond with a final answer section containing exactly one TSV codeblock total.
+
+Inside that one codeblock, write the league/tournament header line exactly as shown below, then one prediction per line in ONLY the format:
+"TeamName score"
+
+Then write the next league/tournament header and its predictions. Match the order given in each block. Do not add explanations, extra labels inside the codeblock, or commentary after the final answer section.
+
+Example block:
+LCS - LCS 2026 Spring Playoffs
+All matches in this block are Best of 5. Possible scores are 3-0 or 3-1 or 3-2.
+1. C9 vs FLY
+2. LYON vs TL</pre>
+      </section>
+
+      <section class="band split" aria-labelledby="models-title">
+        <div class="section-heading">
+          <p class="eyebrow">Model bench</p>
+          <h2 id="models-title">The current table</h2>
+          <p>
+            Models are normalized rows, not hardcoded spreadsheet columns. Adding a new LLM changes data, not schema.
+          </p>
+        </div>
+        <ul class="model-strip" aria-label="Active models">
+          <li>gpt</li>
+          <li>Grok</li>
+          <li>Kimi</li>
+          <li>Gemini</li>
+          <li>DeepSeek</li>
+          <li>GLM</li>
+          <li>Claude</li>
+          <li>Qwen</li>
+          <li>MuseSpark</li>
+        </ul>
+      </section>
+
+      <section class="band safety" aria-labelledby="safety-title">
+        <div>
+          <p class="eyebrow">Data provenance</p>
+          <h2 id="safety-title">One source of truth</h2>
+          <p>
+            Scores and match data come from the maintainer's local SQLite database only. The public repository can
+            improve the app and documentation, but external commits do not change benchmark results because they cannot
+            be validated against the private workflow history.
+          </p>
+        </div>
+        <pre aria-label="Database safety files">data/predictions.sqlite
+data/predictions.safety.sqlite</pre>
+      </section>
+    </main>
+  </body>
+</html>

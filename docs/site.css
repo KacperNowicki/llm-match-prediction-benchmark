@@ -1,0 +1,491 @@
+:root {
+  color-scheme: dark;
+  --bg: #07090c;
+  --panel: #111820;
+  --panel-2: #17222d;
+  --ink: #f1f6ff;
+  --muted: #9fb0c3;
+  --line: #263848;
+  --red: #ff4f68;
+  --gold: #ffc857;
+  --green: #59d99d;
+  --blue: #7cc7ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    linear-gradient(135deg, rgba(255, 79, 104, 0.16), transparent 30rem),
+    radial-gradient(circle at 90% 5%, rgba(124, 199, 255, 0.18), transparent 25rem),
+    var(--bg);
+  color: var(--ink);
+  font-family: "Aptos", "Segoe UI", sans-serif;
+}
+
+main {
+  overflow: hidden;
+}
+
+.hero,
+.band {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.hero {
+  min-height: 92vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
+  gap: 54px;
+  align-items: center;
+  padding: 74px 0 42px;
+}
+
+.hero-copy {
+  max-width: 660px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--gold);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  margin: 0;
+  letter-spacing: 0;
+  line-height: 0.94;
+}
+
+h1 {
+  max-width: 660px;
+  font-size: clamp(4rem, 7.6vw, 7.1rem);
+  text-transform: uppercase;
+}
+
+h2 {
+  font-size: clamp(2.2rem, 5vw, 5rem);
+}
+
+.lede {
+  max-width: 690px;
+  margin: 28px 0 0;
+  color: var(--muted);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  line-height: 1.45;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+a {
+  color: var(--ink);
+}
+
+.hero-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  background: rgba(17, 24, 32, 0.78);
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.hero-actions a:hover {
+  border-color: var(--gold);
+  transform: translateY(-1px);
+}
+
+.score-orbit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  transform: rotate(-1deg);
+}
+
+.score-tile {
+  min-height: 156px;
+  border: 1px solid var(--line);
+  background: linear-gradient(145deg, rgba(23, 34, 45, 0.94), rgba(10, 14, 19, 0.96));
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+}
+
+.score-tile.major {
+  grid-column: span 2;
+  min-height: 220px;
+  background:
+    linear-gradient(135deg, rgba(255, 200, 87, 0.2), rgba(255, 79, 104, 0.08)),
+    var(--panel);
+}
+
+.score-tile span {
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: clamp(2.4rem, 6vw, 5.8rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.score-tile strong {
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+}
+
+.band {
+  padding: 76px 0;
+  border-top: 1px solid rgba(38, 56, 72, 0.72);
+}
+
+.section-heading {
+  max-width: 760px;
+}
+
+.section-heading p:not(.eyebrow),
+.safety p {
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.6;
+}
+
+.league-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(140px, 1fr));
+  gap: 10px;
+  margin-top: 34px;
+}
+
+.league-grid article,
+.flow div,
+.leader-card,
+.score-table-wrap {
+  border: 1px solid var(--line);
+  background: rgba(17, 24, 32, 0.78);
+}
+
+.league-grid article,
+.flow div {
+  padding: 20px;
+}
+
+.league-grid span,
+.flow span {
+  color: var(--green);
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.league-grid strong,
+.flow strong {
+  display: block;
+  margin-top: 18px;
+  font-size: 1.35rem;
+}
+
+.league-grid p,
+.flow p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.leader-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.75fr);
+  gap: 28px;
+  align-items: end;
+  margin-top: 34px;
+  padding: 26px;
+  background:
+    linear-gradient(135deg, rgba(255, 200, 87, 0.12), rgba(89, 217, 157, 0.06)),
+    rgba(17, 24, 32, 0.86);
+}
+
+.rank-badge {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--gold);
+  color: #16100a;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-weight: 900;
+}
+
+h3 {
+  margin: 16px 0 0;
+  font-size: clamp(1.8rem, 3vw, 3.2rem);
+  line-height: 1;
+}
+
+.leader-card p {
+  max-width: 640px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 1.08rem;
+  line-height: 1.5;
+}
+
+.leader-card dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: 0;
+}
+
+.leader-card dl div {
+  border-left: 1px solid var(--line);
+  padding-left: 14px;
+}
+
+dt {
+  color: var(--muted);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+dd {
+  margin: 8px 0 0;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.score-table-wrap {
+  margin-top: 14px;
+  overflow-x: auto;
+}
+
+.score-table-wrap.wide {
+  margin-top: 34px;
+}
+
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+
+.score-table th,
+.score-table td {
+  padding: 15px 18px;
+  border-bottom: 1px solid rgba(38, 56, 72, 0.74);
+  text-align: left;
+}
+
+.score-table th {
+  color: var(--muted);
+  font-size: 0.76rem;
+  text-transform: uppercase;
+}
+
+.score-table td {
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-weight: 800;
+}
+
+.score-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.tournament-table {
+  min-width: 1120px;
+}
+
+.tournament-table th,
+.tournament-table td {
+  padding-left: 12px;
+  padding-right: 12px;
+  font-size: 0.88rem;
+}
+
+.tournament-table td:first-child,
+.tournament-table th:first-child {
+  position: sticky;
+  left: 0;
+  min-width: 190px;
+  background: #111820;
+}
+
+.table-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.pending-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.pending-strip span {
+  border: 1px solid var(--line);
+  background: rgba(23, 34, 45, 0.72);
+  color: var(--muted);
+  padding: 10px 12px;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 34px;
+}
+
+.method-grid article {
+  border: 1px solid var(--line);
+  background: rgba(17, 24, 32, 0.78);
+  padding: 20px;
+}
+
+.method-grid span {
+  color: var(--gold);
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-weight: 900;
+}
+
+.method-grid strong {
+  display: block;
+  margin-top: 18px;
+  font-size: 1.2rem;
+}
+
+.method-grid p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.prompt-sample {
+  margin-top: 14px;
+  color: #dbeafe;
+  font-size: 0.92rem;
+}
+
+.flow {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(160px, 1fr));
+  gap: 0;
+  margin-top: 34px;
+  overflow-x: auto;
+}
+
+.flow div {
+  min-width: 170px;
+  border-right: 0;
+}
+
+.flow div:last-child {
+  border-right: 1px solid var(--line);
+}
+
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(300px, 1.1fr);
+  gap: 46px;
+  align-items: start;
+}
+
+.model-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.model-strip li {
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  padding: 14px 18px;
+  color: var(--ink);
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-weight: 800;
+}
+
+.safety {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+  gap: 44px;
+  padding-bottom: 96px;
+}
+
+pre {
+  margin: 0;
+  border: 1px solid var(--line);
+  background: #05070a;
+  color: var(--blue);
+  padding: 22px;
+  white-space: pre-wrap;
+  font: 800 1rem/1.6 "Cascadia Mono", Consolas, monospace;
+}
+
+@media (max-width: 920px) {
+  .hero,
+  .split,
+  .safety {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .league-grid,
+  .method-grid {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+
+  .leader-card,
+  .leader-card dl {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero,
+  .band {
+    width: min(100% - 22px, 1180px);
+  }
+
+  h1 {
+    font-size: clamp(3.3rem, 18vw, 5rem);
+  }
+
+  .score-orbit,
+  .league-grid,
+  .method-grid {
+    grid-template-columns: 1fr;
+    transform: none;
+  }
+
+  .score-tile.major {
+    grid-column: span 1;
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "llm-match-prediction-benchmark",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm run dev:api\" \"npm run dev:web\"",
+    "dev:api": "tsx server/index.ts",
+    "dev:web": "vite --host 127.0.0.1 --port 5173",
+    "build": "tsc --noEmit && vite build",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "deps:age": "node scripts/check-dependency-age.mjs",
+    "deps:compromised": "node scripts/check-compromised-packages.mjs",
+    "verify": "npm run deps:age && npm run deps:compromised && npm run build && npm run test && npm run test:e2e"
+  },
+  "overrides": {
+    "@babel/compat-data": "7.29.0",
+    "@babel/parser": "7.29.2",
+    "baseline-browser-mapping": "2.10.20",
+    "caniuse-lite": "1.0.30001785",
+    "electron-to-chromium": "1.5.340",
+    "es-module-lexer": "2.0.0",
+    "nanoid": "3.3.11",
+    "node-releases": "2.0.37",
+    "postcss": "8.5.10",
+    "rollup": "4.59.0",
+    "tinyexec": "1.1.1"
+  },
+  "dependencies": {
+    "lucide-react": "0.468.0",
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.58.2",
+    "@types/node": "24.8.1",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "4.6.0",
+    "concurrently": "9.2.1",
+    "tsx": "4.21.0",
+    "typescript": "5.9.3",
+    "vite": "6.4.2",
+    "vitest": "4.1.4"
+  }
+}
