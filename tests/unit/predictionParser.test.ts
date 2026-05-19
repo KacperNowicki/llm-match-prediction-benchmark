@@ -172,18 +172,18 @@ describe("scoring", () => {
 describe("legacy sheet import parser", () => {
   it("reads current workbook-shaped TSV including model columns", () => {
     const parsed = parseLegacyTsv(
-      "Match ID\tStage\tRound\tBO\tTeam1\tTeam2\tActual Winner\tActual Score\tgpt\tGrok\n" +
+      "Match ID\tStage\tRound\tBO\tTeam1\tTeam2\tActual Winner\tActual Score\tGPT\tGrok\n" +
         "M1\tSpring\tW1D1\t3\tT1\tDK\tT1\t2-0\tT1 2-0\tDK 2-1"
     );
 
-    expect(parsed.modelNames).toEqual(["gpt", "Grok"]);
+    expect(parsed.modelNames).toEqual(["GPT", "Grok"]);
     expect(parsed.rows[0]).toMatchObject({
       externalMatchId: "M1",
       actualWinner: "T1",
       actualScore: "2-0"
     });
     expect(parsed.rows[0].predictions[0]).toMatchObject({
-      modelName: "gpt",
+      modelName: "GPT",
       predictedWinner: "T1",
       predictedScore: "2-0",
       status: "valid"
@@ -192,14 +192,14 @@ describe("legacy sheet import parser", () => {
 
   it("ignores legacy Consensus columns because consensus is derived", () => {
     const parsed = parseLegacyTsv(
-      "Match ID\tStage\tRound\tBO\tTeam1\tTeam2\tActual Winner\tActual Score\tConsensus\tgpt\n" +
+      "Match ID\tStage\tRound\tBO\tTeam1\tTeam2\tActual Winner\tActual Score\tConsensus\tGPT\n" +
         "M1\tSpring\tW1D1\t3\tT1\tDK\tT1\t2-0\tT1 2-0\tDK 2-1"
     );
 
-    expect(parsed.modelNames).toEqual(["gpt"]);
+    expect(parsed.modelNames).toEqual(["GPT"]);
     expect(parsed.rows[0].predictions).toHaveLength(1);
     expect(parsed.rows[0].predictions[0]).toMatchObject({
-      modelName: "gpt",
+      modelName: "GPT",
       predictedWinner: "DK",
       predictedScore: "2-1"
     });
@@ -207,7 +207,7 @@ describe("legacy sheet import parser", () => {
 
   it("infers match length from legacy actual scores before parsing predictions", () => {
     const parsed = parseLegacyTsv(
-      "Match ID\tStage\tRound\tBO\tTeam1\tTeam2\tActual Winner\tActual Score\tgpt\n" +
+      "Match ID\tStage\tRound\tBO\tTeam1\tTeam2\tActual Winner\tActual Score\tGPT\n" +
         "M14\tLEC Versus\tRound 4\t3\tG2\tMKOI\tG2\t3-0\tG2 3-1"
     );
 

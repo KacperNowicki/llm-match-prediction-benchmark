@@ -15,7 +15,7 @@ const safetyDbPath = process.env.LOLPH_SAFETY_DB_PATH
     ? primaryDbPath.replace(/\.sqlite$/, ".safety.sqlite")
     : path.join(path.dirname(primaryDbPath), "predictions.safety.sqlite");
 
-export const defaultModels = ["gpt", "Grok", "Kimi", "Gemini", "DeepSeek", "GLM", "Claude"] as const;
+export const defaultModels = ["GPT", "Grok", "Kimi", "Gemini", "DeepSeek", "GLM", "Claude"] as const;
 
 export const legacyModelColumns = [...defaultModels];
 
