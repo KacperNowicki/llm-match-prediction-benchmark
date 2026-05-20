@@ -26,7 +26,7 @@
         </div>
         <div class="score-orbit" aria-label="Benchmark snapshot">
           <div class="score-tile major">
-            <span>1,857</span>
+            <span>2,084</span>
             <strong>LLM predictions</strong>
           </div>
           <div class="score-tile">
@@ -46,7 +46,7 @@
 
       <section class="band stats-band" aria-labelledby="stats-title">
         <div class="section-heading">
-          <p class="eyebrow">Snapshot: May 19, 2026</p>
+          <p class="eyebrow">Snapshot: May 20, 2026</p>
           <h2 id="stats-title">Benchmark scoreboard</h2>
           <p>
             Scoring is simple: correct winner = 1 point, exact score = +1 point. Public page numbers are copied from
@@ -138,6 +138,20 @@
           <span>LCS Spring Playoffs: 2 matches picked by 8 models</span>
           <span>LEC Spring Playoffs: 2 matches picked by 8 models</span>
           <span>LPL Split 2 Playoffs: 4 matches picked by 8 models</span>
+        </div>
+      </section>
+
+      <section class="band predictions-band" aria-labelledby="predictions-title">
+        <div class="section-heading">
+          <p class="eyebrow">Exact prediction ledger</p>
+          <h2 id="predictions-title">The picks, not just the scores</h2>
+          <p>
+            Reviewed saved LLM predictions from the local SQLite source of truth. Consensus is intentionally omitted
+            here because it is derived from LLM picks, not a model response.
+          </p>
+        </div>
+        <div id="prediction-ledger" class="prediction-ledger" aria-live="polite">
+          <p class="ledger-loading">Loading exact predictions...</p>
         </div>
       </section>
 
@@ -278,5 +292,74 @@ All matches in this block are Best of 5. Possible scores are 3-0 or 3-1 or 3-2.
 data/predictions.safety.sqlite</pre>
       </section>
     </main>
+    <script>
+      const ledgerRoot = document.getElementById("prediction-ledger");
+      const escapeHtml = (value) =>
+        String(value ?? "").replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        })[char]);
+
+      function renderPredictionLedger(data) {
+        const generated = new Date(data.generatedAt);
+        const generatedLabel = Number.isNaN(generated.getTime())
+          ? data.generatedAt
+          : generated.toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "UTC" }) + " UTC";
+        ledgerRoot.innerHTML = `
+          <div class="ledger-summary">
+            <span>${data.summary.tournaments} tournaments</span>
+            <span>${data.summary.matches} matches</span>
+            <span>${data.summary.predictions} saved predictions</span>
+            <span>exported ${escapeHtml(generatedLabel)}</span>
+          </div>
+          ${data.tournaments.map((tournament, index) => `
+            <details class="prediction-tournament" ${index < 4 ? "open" : ""}>
+              <summary>
+                <span>${escapeHtml(tournament.league)} | ${escapeHtml(tournament.name)}</span>
+                <strong>${tournament.completedCount}/${tournament.matchCount} scored · ${tournament.predictionCount} picks</strong>
+              </summary>
+              <div class="prediction-table-wrap">
+                <table class="prediction-table">
+                  <thead>
+                    <tr>
+                      <th>Match</th>
+                      <th>Actual</th>
+                      ${data.models.map((model) => `<th>${escapeHtml(model)}</th>`).join("")}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${tournament.matches.map((match) => `
+                      <tr>
+                        <td>
+                          <span class="match-meta">#${match.matchOrder} · BO${match.bestOf}${match.round ? ` · ${escapeHtml(match.round)}` : ""}</span>
+                          <strong>${escapeHtml(match.team1)} vs ${escapeHtml(match.team2)}</strong>
+                        </td>
+                        <td><span class="pick ${match.actual ? "outcome-exact" : "outcome-pending"}">${escapeHtml(match.actual ?? "pending")}</span></td>
+                        ${match.predictions.map((prediction) => `
+                          <td><span class="pick outcome-${prediction.outcome}">${escapeHtml(prediction.pick ?? "-")}</span></td>
+                        `).join("")}
+                      </tr>
+                    `).join("")}
+                  </tbody>
+                </table>
+              </div>
+            </details>
+          `).join("")}
+        `;
+      }
+
+      fetch("./predictions.json")
+        .then((response) => {
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response.json();
+        })
+        .then(renderPredictionLedger)
+        .catch((error) => {
+          ledgerRoot.innerHTML = `<p class="ledger-loading">Could not load prediction export: ${escapeHtml(error.message)}</p>`;
+        });
+    </script>
   </body>
 </html>

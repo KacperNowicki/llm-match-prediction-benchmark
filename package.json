@@ -10,6 +10,7 @@
     "build": "tsc --noEmit && vite build",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "export:pages": "tsx scripts/export-pages-predictions.ts",
     "deps:age": "node scripts/check-dependency-age.mjs",
     "deps:compromised": "node scripts/check-compromised-packages.mjs",
     "verify": "npm run deps:age && npm run deps:compromised && npm run build && npm run test && npm run test:e2e"

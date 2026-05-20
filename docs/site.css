@@ -350,6 +350,158 @@ dd {
   font-weight: 800;
 }
 
+.prediction-ledger {
+  margin-top: 34px;
+}
+
+.ledger-loading,
+.ledger-summary,
+.prediction-tournament {
+  border: 1px solid var(--line);
+  background: rgba(17, 24, 32, 0.78);
+}
+
+.ledger-loading {
+  margin: 0;
+  padding: 20px;
+  color: var(--muted);
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-weight: 800;
+}
+
+.ledger-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 14px;
+}
+
+.ledger-summary span {
+  border: 1px solid rgba(38, 56, 72, 0.8);
+  background: rgba(5, 7, 10, 0.62);
+  color: var(--muted);
+  padding: 10px 12px;
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 0.84rem;
+  font-weight: 800;
+}
+
+.prediction-tournament {
+  margin-top: 12px;
+}
+
+.prediction-tournament summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  cursor: pointer;
+  color: var(--ink);
+  font-weight: 900;
+}
+
+.prediction-tournament summary::marker {
+  color: var(--gold);
+}
+
+.prediction-tournament summary strong {
+  color: var(--green);
+  font-family: "Cascadia Mono", Consolas, monospace;
+  white-space: nowrap;
+}
+
+.prediction-table-wrap {
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+}
+
+.prediction-table {
+  width: 100%;
+  min-width: 1280px;
+  border-collapse: collapse;
+}
+
+.prediction-table th,
+.prediction-table td {
+  border-bottom: 1px solid rgba(38, 56, 72, 0.72);
+  padding: 12px 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prediction-table th {
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.prediction-table td {
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 0.84rem;
+}
+
+.prediction-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.prediction-table th:first-child,
+.prediction-table td:first-child {
+  position: sticky;
+  left: 0;
+  width: 260px;
+  min-width: 260px;
+  background: #111820;
+  z-index: 1;
+}
+
+.prediction-table td:first-child strong {
+  display: block;
+  margin-top: 5px;
+  color: var(--ink);
+  font-family: "Aptos", "Segoe UI", sans-serif;
+  font-size: 0.96rem;
+}
+
+.match-meta {
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.pick {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 4px 8px;
+  border: 1px solid rgba(159, 176, 195, 0.24);
+  background: rgba(5, 7, 10, 0.54);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.outcome-exact {
+  border-color: rgba(89, 217, 157, 0.48);
+  color: var(--green);
+}
+
+.outcome-score-miss {
+  border-color: rgba(255, 200, 87, 0.48);
+  color: var(--gold);
+}
+
+.outcome-wrong-winner {
+  border-color: rgba(255, 79, 104, 0.58);
+  color: var(--red);
+}
+
+.outcome-pending {
+  border-color: rgba(124, 199, 255, 0.36);
+  color: var(--blue);
+}
+
+.outcome-missing {
+  color: #66788b;
+}
+
 .method-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(160px, 1fr));
